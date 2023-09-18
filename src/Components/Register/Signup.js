@@ -84,7 +84,7 @@ const Signup = ({ toggleForm,setLoading,setFLoading,formLoading}) => {
       
        
           <button className="resgister-btn" type="submit" >
-          {formLoading ? <Example color={"#ffffff"} width={"10px"} height={"10px"}/> : "Sign un"}
+          {formLoading ? <Example color={"#ffffff"} width={"10px"} height={"10px"}/> : "Sign up"}
           </button>
           <p className="p">
             Already have an account?
