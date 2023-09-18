@@ -75,8 +75,8 @@ const Search = () => {
       <div className="search-container">
         {loading ? (
           <Loading
-            width={"15px"}
-            height={"15px"}
+            width={"20px"}
+            height={"20px"}
             width2={"100vw"}
             height2={"100dvh"}
           />
