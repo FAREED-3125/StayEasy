@@ -8,7 +8,9 @@ import axios from "axios";
 import { AuthContextProvider } from "../../Context/AuthContext";
 import { AuthOpt } from "../../Context/AuthContext";
 import { URL_fetch } from "../../hooks/useFetch";
-const Signin = ({toggleForm,setLoading}) => {
+import Example from "../Loading/Loading";
+           
+const Signin = ({toggleForm,setLoading,setFLoading,formLoading}) => {
   const {authInfo,dispatch} = useContext(AuthContextProvider);
   const [email,setEmail] = useState("");
   const [password , setPass] = useState("");
@@ -16,7 +18,7 @@ const Signin = ({toggleForm,setLoading}) => {
   const navigate = useNavigate();
   const handleLoginFunc = async(e) => {
     e.preventDefault();
-  
+    setFLoading(true)
     try {
       
       const response = await axios.post(`${URL_fetch}/Auth/login`,{email,password});
@@ -31,7 +33,7 @@ const Signin = ({toggleForm,setLoading}) => {
       console.log(err)
       dispatch({type: AuthOpt.USER_ERR,payload: error.response.data})
     }finally{
-     
+      setFLoading(false)
     }
   }
   return (
@@ -73,7 +75,7 @@ const Signin = ({toggleForm,setLoading}) => {
       
           <a className="a"href="#">Forgot Your Password</a>
           <button className="resgister-btn" type="submit">
-            Sign In
+          {formLoading ? <Example color={"#ffffff"} width="10px" height={"10px"}/> : "Sign in"}
           </button>
 
           <p className="p" href="">

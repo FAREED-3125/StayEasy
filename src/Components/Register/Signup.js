@@ -6,8 +6,9 @@ import { FaFacebookF, FaGoogle, FaTwitter } from "react-icons/fa";
 import axios from "axios";
 import { AuthContextProvider } from "../../Context/AuthContext";
 import { AuthOpt } from "../../Context/AuthContext";
+import Example from "../Loading/Loading";
 
-const Signup = ({ toggleForm,setLoading}) => {
+const Signup = ({ toggleForm,setLoading,setFLoading,formLoading}) => {
   const {authInfo,dispatch} = useContext(AuthContextProvider);
   const [email,setEmail] = useState("");
   const [username,setusername] = useState("");
@@ -16,6 +17,7 @@ const Signup = ({ toggleForm,setLoading}) => {
   const navigate = useNavigate();
   const handleSignupFunc = async(e) => {
     e.preventDefault();
+    setFLoading(true)
     try {
       const response = await axios.post(`${URL_fetch}/Auth/signup`,{email,password,username});
       setLoading(true)
@@ -26,6 +28,8 @@ const Signup = ({ toggleForm,setLoading}) => {
       setErr(true)
       console.log(err)
       dispatch({type: AuthOpt.USER_ERR,payload: error?.response?.data})
+    }finally{
+      setFLoading(false)
     }
   }
   return (
@@ -80,7 +84,7 @@ const Signup = ({ toggleForm,setLoading}) => {
       
        
           <button className="resgister-btn" type="submit" >
-            SignUp
+          {formLoading ? <Example color={"#ffffff"} width={"10px"} height={"10px"}/> : "Sign un"}
           </button>
           <p className="p">
             Already have an account?
@@ -89,8 +93,7 @@ const Signup = ({ toggleForm,setLoading}) => {
                 display: "inline"
               }
             }  className="switch" onClick={toggleForm}>
-             {" "} Sign in
-            </span>
+            Sign in </span>
           </p>
         </form>
       </div>
