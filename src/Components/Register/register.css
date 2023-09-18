@@ -55,7 +55,7 @@
   padding: 12px 45px;
   letter-spacing: 1px;
   text-transform: uppercase;
-  transition: all 80ms ease-in;
+  transition: all .8s ease-in;
   border-radius: .5rem;
 }
 
