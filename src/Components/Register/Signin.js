@@ -7,7 +7,7 @@ import { useFetch } from "../../hooks/useFetch";
 import axios from "axios";
 import { AuthContextProvider } from "../../Context/AuthContext";
 import { AuthOpt } from "../../Context/AuthContext";
-
+import { URL_fetch } from "../../hooks/useFetch";
 const Signin = ({toggleForm,setLoading}) => {
   const {authInfo,dispatch} = useContext(AuthContextProvider);
   const [email,setEmail] = useState("");
@@ -19,7 +19,7 @@ const Signin = ({toggleForm,setLoading}) => {
   
     try {
       
-      const response = await axios.post('/Auth/login',{email,password});
+      const response = await axios.post(`${URL_fetch}/Auth/login`,{email,password});
         setLoading(true)
         dispatch({type: AuthOpt.LOGIN_USER,payload: response.data})
        

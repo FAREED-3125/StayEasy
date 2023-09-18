@@ -1,6 +1,6 @@
 import React ,{useState,useContext}from "react";
 import { Form,useNavigate } from "react-router-dom";
-
+import { URL_fetch } from "../../hooks/useFetch";
 //icon imports
 import { FaFacebookF, FaGoogle, FaTwitter } from "react-icons/fa";
 import axios from "axios";
@@ -17,7 +17,7 @@ const Signup = ({ toggleForm,setLoading}) => {
   const handleSignupFunc = async(e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/Auth/signup',{email,password,username});
+      const response = await axios.post(`${URL_fetch}/Auth/signup`,{email,password,username});
       setLoading(true)
       dispatch({type: AuthOpt.LOGIN_USER,payload: response.data})
       setLoading(false)

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { URL_fetch } from "./useFetch";
 
 
 export const useReviews = (body,limit = 0) => {
@@ -13,7 +14,7 @@ export const useReviews = (body,limit = 0) => {
       setLoading(true);
 
       try {
-        const response = await axios.post(`/Review/ManyReviews?limit=${limit}`,body);
+        const response = await axios.post(`${URL_fetch}/Review/ManyReviews?limit=${limit}`,body);
        
         setData(response.data)
       } catch (err) {
@@ -27,7 +28,7 @@ export const useReviews = (body,limit = 0) => {
   const reFetch = async () => {
     setLoading(true);
     try {
-      const response = await axios.post(`/Rooms/FindRooms`,body);
+      const response = await axios.post(`${URL_fetch}/Rooms/FindRooms`,body);
       if (!response.ok) throw Error(response.error);
       setData(response.data);
     } catch (err) {
@@ -42,7 +43,7 @@ export const useReviews = (body,limit = 0) => {
 
 export const createReview = async (body,id) => {
   try{
-    const review = await axios.post(`/Review/CreateReview/${id}`,body);
+    const review = await axios.post(`${URL_fetch}/Review/CreateReview/${id}`,body);
     return review;
   }catch(err){
     console.log(err);

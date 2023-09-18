@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-
+import { URL_fetch } from "./useFetch";
 
 export const useRooms = (body) => {
   const [rdata, setData] = useState([]);
@@ -12,7 +12,7 @@ export const useRooms = (body) => {
       setLoading(true);
 if(body){
   try {
-    const response = await axios.post(`/Rooms/FindRooms`,body);
+    const response = await axios.post(`${URL_fetch}/Rooms/FindRooms`,body);
     setData(response.data)
   } catch (err) {
     seterr(err);
@@ -28,7 +28,7 @@ if(body){
   const reFetch = async () => {
     setLoading(true);
     try {
-      const response = await axios.post(`/Rooms/FindRooms`,body);
+      const response = await axios.post(`${URL_fetch}/Rooms/FindRooms`,body);
       if (!response.ok) throw Error(response.error);
       setData(response.data);
     } catch (err) {
