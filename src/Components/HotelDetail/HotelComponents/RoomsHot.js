@@ -74,7 +74,7 @@ const RoomsHot = ({ resData, dataOffer }) => {
 
                           }
                            
-                          }}>{bookInfo.roomnumber.includes(room?.number) ? "selected" : "Available"}</div>
+                          }}>{ "Available"}</div>
                         )}
                       </div>
                     ))
