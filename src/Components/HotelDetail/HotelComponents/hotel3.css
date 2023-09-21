@@ -9,6 +9,9 @@
     gap: 10px;
    
 }
+.ro-btn{
+  margin-top: .5rem;
+}
 .room-container h4{
     font-weight: 600;
     color: var(--g2-color);
