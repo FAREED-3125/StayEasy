@@ -1,0 +1,59 @@
+.rooms-number-cont{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    padding: .5rem;
+    padding-top: 2rem;
+}
+
+.ro-num-cont{
+    display: flex;
+    padding:.5rem;
+    border-radius: .2rem;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--p-color);
+    flex-direction: column;
+    
+}
+
+.ro-number{
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 3px;
+    color: var(--g2-color);
+}
+
+.ro-number span
+{
+    color: var(--g2-color);
+}
+
+.ro-number span:nth-child(2){
+    color: var(--s-color);
+}
+.ro-num-cont .btn{
+    padding: 0 !important;
+    margin: 0;
+}
+.ro-num-cont .btn-unavailable{
+    display: flex;
+    flex-direction: column;
+    border: 2px solid var(--r-color);
+    background-color: transparent;
+    color: var(--r-color);
+}
+
+.ro-num-cont .btn-select{
+    display: flex;
+    flex-direction: column;
+    border: 2px solid var(--gr-color);
+    background-color: var(--gr1-color);
+    color: var(--gr-color);
+    
+}
+
+.ro-num-cont .btn-unavailable span:nth-child(2){
+    font-size: 10px;
+    font-weight: 400;
+}
