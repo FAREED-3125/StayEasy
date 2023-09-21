@@ -13,10 +13,13 @@ import { addDays } from "date-fns";
 import { searchContext } from "../Search.js/Search";
 import Minmax from "./Minmax";
 import Guestrooms from "./Guestrooms";
+import { BookContextProvider, FormOpt } from "../../Context/FormContext";
 export const filterFormcontext = createContext();
 
 // =======================================================================================
 const Filter = () => {
+  const {bookInfo,dispatch} = useContext(BookContextProvider)
+
   const [rooms, setRooms] = useState(0);
   const [adults, setAdults] = useState(0);
   const [children, setChildren] = useState(0);
@@ -25,8 +28,8 @@ const Filter = () => {
   const [City, setcity] = useState("");
   const [range, setRange] = useState([
     {
-      startDate: new Date(),
-      endDate: addDays(new Date(), 7),
+      startDate: new Date(bookInfo.from),
+      endDate: addDays(new Date(bookInfo.from), bookInfo.days),
       key: "selection",
     },
   ]);
@@ -36,8 +39,23 @@ const Filter = () => {
   const refOne2 = useRef();
   const { setOpen, setEdit, edit, city, rooms1, guest1, child1, adult1, open } =
     useContext(searchContext);
+
+    function getDayDifference(startDate, endDate) {
+      // Create Date objects from the input strings
+      const date1 = new Date(startDate);
+      const date2 = new Date(endDate);
+    
+      // Calculate the difference in milliseconds
+      const differenceInMilliseconds = date2 - date1;
+    
+      // Convert milliseconds to days
+      const differenceInDays = differenceInMilliseconds / (1000 * 60 * 60 * 24);
+    
+      return Math.abs(Math.round(differenceInDays)); // Use Math.abs to ensure a positive result
+    }
   useEffect(() => {
     // event listeners
+    const dayDifference = getDayDifference(bookInfo?.from, bookInfo?.to);
     setcity(city);
     setRooms(Number(rooms1));
     setAdults(Number(adult1));
@@ -45,6 +63,7 @@ const Filter = () => {
     setGuest(Number(guest1));
     document.addEventListener("keydown", hideOnEscape, true);
     document.addEventListener("click", hideOnClickOutside, true);
+    dispatch({type: FormOpt.UPDATE_SEARCH,payload: {days: dayDifference}});
   }, []);
 
   // hide dropdown on ESC press
@@ -91,7 +110,15 @@ const Filter = () => {
           className="book-form"
           action="/search"
           method="GET"
-          onSubmit={(e) => {}}
+          onSubmit={(e) => {
+   
+            dispatch(
+              {type: FormOpt.UPDATE_SEARCH,payload: {
+                city: [city],rooms,adults,guest,from: format(range[0].startDate, "yyyy/MM/dd"),to:format(range[0].endDate, "yyyy/MM/dd"),children
+              }}
+            )
+
+          }}
         >
           <label htmlFor="city">
             <span>Destination:</span>

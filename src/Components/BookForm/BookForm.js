@@ -137,7 +137,7 @@ const BookForm = ({ width }) => {
               <p>to</p>
             </div>
             <div className="to">
-              <p>{format(range[0].endDate, "yyyy/MM/dd")}</p>
+              <p>{format(range[0].endDate, "dd/MM/yyyy")}</p>
             </div>
           </div>
           <input
