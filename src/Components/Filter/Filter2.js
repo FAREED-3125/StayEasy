@@ -28,7 +28,7 @@ const {bookInfo,dispatch} = useContext(BookContextProvider)
   const [range, setRange] = useState([
     {
       startDate: new Date(),
-      endDate: addDays(new Date(), b 7),
+      endDate: addDays(new Date(),  7),
       key: "selection",
     },
   ]);
