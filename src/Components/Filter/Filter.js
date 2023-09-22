@@ -28,8 +28,8 @@ const Filter = () => {
   const [City, setcity] = useState("");
   const [range, setRange] = useState([
     {
-      startDate: new Date(bookInfo.from),
-      endDate: addDays(new Date(bookInfo.from), bookInfo.days),
+      startDate: new Date((bookInfo?.from) && bookInfo?.from),
+      endDate: addDays(new Date((bookInfo?.from) && bookInfo?.from), bookInfo?.days || 7),
       key: "selection",
     },
   ]);
